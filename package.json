@@ -1,0 +1,1 @@
+{"name":"amaba","private":true,"scripts":{"start":"node server.js","test":"node --test --test-isolation=none tests/server.test.js"},"engines":{"node":">=22"}}

@@ -1,0 +1,36 @@
+.access-main { padding: 64px 0 80px; background: radial-gradient(circle at 8% 80%, var(--blue-soft), transparent 35%), radial-gradient(circle at 95% 10%, var(--purple-soft), transparent 40%), var(--soft); }
+.access-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.access-intro { padding-top: 24px; }
+.access-intro h1 { color: var(--purple-dark); font-size: clamp(2.6rem, 4.5vw, 4.5rem); }
+.access-intro h1 span { display: block; color: var(--ink); }
+.access-photo { margin: 30px 0 24px; border-radius: 24px; overflow: hidden; background: white; box-shadow: 0 12px 40px #4b2c7810; }
+.access-photo img { width: 100%; height: 260px; object-fit: cover; }
+.access-photo figcaption { padding: 16px 22px; color: var(--purple-dark); font-weight: 700; }
+.access-card { background: white; padding: clamp(24px, 4vw, 44px); border: 1px solid var(--line); border-radius: 24px; box-shadow: 0 16px 50px #4b2c780a; }
+.access-card h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); }
+.access-card fieldset { min-width: 0; border: 0; border-top: 1px solid var(--line); padding: 18px 0; margin: 0; display: grid; gap: 9px; }
+.access-card legend { font-weight: 800; padding: 0 10px 0 0; }
+.privacy-note { padding: 24px; border-radius: 18px; border: 1px solid var(--line); background: white; margin-top: 24px; }
+.privacy-note h2 { font-size: 1.3rem; }
+.privacy-note p { font-size: .9rem; }
+.access-card form { display: grid; gap: 9px; margin-top: 26px; }
+.access-card label { font-weight: 700; font-size: .9rem; margin-top: 8px; }
+.access-card input:not([type=checkbox]), .access-card select { width: 100%; min-width: 0; padding: 13px 14px; min-height: 48px; border: 1px solid #bdb2cc; border-radius: 10px; font: inherit; color: var(--ink); background: white; }
+.password-field { display: flex; position: relative; }
+.password-field input { padding-right: 90px !important; }
+.password-field button { position: absolute; right: 8px; top: 5px; bottom: 5px; border: 0; background: transparent; color: var(--purple-dark); font-weight: 700; cursor: pointer; }
+.field-hint { font-size: .8rem; margin: 0; color: var(--muted); }
+.consent-label { display: flex; gap: 10px; align-items: flex-start; font-weight: 400 !important; }
+.consent-label input { width: 18px; height: 18px; flex: none; margin-top: 3px; accent-color: var(--purple); }
+.access-card a { color: var(--purple-dark); }
+.access-submit { width: 100%; cursor: pointer; }
+.access-submit:disabled { opacity: .65; cursor: wait; }
+.access-switch { margin: 24px 0 0; text-align: center; font-size: .9rem; }
+.access-switch a { font-weight: 750; }
+#form-status { margin: 4px 0; color: var(--purple-dark); font-size: .9rem; }
+#form-status[data-error=true] { color: #a52539; }
+.account-details { padding: 20px; border-radius: 14px; background: var(--soft); overflow-wrap: anywhere; }
+.account-details dt { font-weight: 700; }
+.account-details dd { margin: 0 0 12px; color: var(--body); }
+#family-logout { border: 0; padding: 8px 0; background: none; cursor: pointer; margin-top: 20px; }
+@media (max-width: 850px) { .access-grid { grid-template-columns: 1fr; gap: 32px; max-width: 600px; } .access-main { padding-top: 28px; } .access-intro { padding-top: 0; } .access-photo { display: none; } .access-intro h1 { margin-bottom: 16px; } }

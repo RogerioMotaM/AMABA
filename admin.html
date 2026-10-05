@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Administração | AMABA</title><link rel="stylesheet" href="assets/site.css"><link rel="stylesheet" href="assets/admin.css"><script src="assets/admin.js" defer></script></head>
+<body class="admin-page">
+  <header class="admin-header"><a class="footer-brand" href="index.html">AMABA</a><span>Administração</span><a href="index.html">Ver site ↗</a><button id="logout" class="button button-outline" hidden>Sair</button></header>
+  <main class="container admin-main">
+    <p id="status" role="status" aria-live="polite"></p>
+    <section id="login" class="admin-login"><span class="eyebrow">Área restrita</span><h1>Bem-vinda à administração.</h1><p>Entre para cuidar das publicações e informações da AMABA.</p><form id="login-form"><label for="username">Usuário</label><input id="username" autocomplete="username" value="admin" required><label for="password">Senha de acesso</label><input id="password" type="password" autocomplete="current-password" required><button class="button button-primary" type="submit">Entrar →</button></form><p class="admin-login-help">Esqueceu a senha? Solicite a recuperação ao responsável pelo sistema.</p></section>
+    <section id="panel" hidden>
+      <span class="eyebrow">Gestão de conteúdo</span><h1>Painel da AMABA</h1><p>Organize as novidades, iniciativas e parceiros da associação.</p>
+      <div id="stats" class="admin-stats"></div>
+      <details class="admin-settings"><summary>Minha conta e acessos da equipe</summary><p id="account-name"></p>
+        <form id="password-form" class="admin-form"><h3>Alterar minha senha</h3><div><label for="current-password">Senha atual</label><input id="current-password" type="password" autocomplete="current-password" required></div><div><label for="new-password">Nova senha</label><input id="new-password" type="password" autocomplete="new-password" minlength="12" maxlength="200" required></div><button class="button button-outline">Alterar senha</button></form>
+        <section id="user-management" hidden><h3>Acessos da equipe</h3><div id="users-list"></div><form id="user-form" class="admin-form"><div><label for="new-username">Nome de usuário</label><input id="new-username" pattern="[a-z0-9._\-]{3,40}" autocomplete="off" required></div><div><label for="user-role">Permissão</label><select id="user-role"><option value="editor">Editor — gerencia conteúdo</option><option value="admin">Administrador — gerencia conteúdo e usuários</option></select></div><div><label for="user-password">Senha inicial</label><input id="user-password" type="password" autocomplete="new-password" minlength="12" maxlength="200" required></div><button class="button button-primary">Criar acesso</button></form><h3>Últimas alterações</h3><div id="audit-list"></div></section>
+      </details>
+      <nav class="admin-tabs" aria-label="Gerenciar conteúdo"><button data-section="publicacoes" aria-pressed="true">Publicações</button><button data-section="projetos" aria-pressed="false">Projetos</button><button data-section="parceiros" aria-pressed="false">Parceiros</button></nav>
+      <div class="admin-toolbar"><h2 id="list-title">Publicações</h2><button id="new" class="button button-primary">+ Novo cadastro</button></div>
+      <label for="admin-search">Buscar cadastros</label><input id="admin-search" type="search" placeholder="Buscar por título ou nome">
+      <div id="records" class="admin-records"></div>
+      <section id="editor" class="admin-editor" hidden aria-labelledby="editor-title"><h2 id="editor-title">Novo cadastro</h2>
+        <form id="edit-form" class="admin-form">
+          <input id="record-id" type="hidden">
+          <div><label for="record-title" id="title-label">Título</label><input id="record-title" maxlength="500" required></div>
+          <div data-post-field><label for="record-type">Tipo</label><select id="record-type"><option value="noticia">Notícia</option><option value="evento">Evento</option></select></div>
+          <div data-post-field><label for="record-date">Data da publicação</label><input id="record-date" type="date"></div>
+          <div><label for="record-summary">Resumo / descrição</label><textarea id="record-summary" rows="3" maxlength="2000"></textarea></div>
+          <div><label for="record-image">Imagem</label><input id="record-image" placeholder="assets/foto.jpg ou https://…"><small>Informe o caminho de uma foto existente ou um endereço HTTPS.</small></div>
+          <div><label for="image-upload">Enviar foto</label><input id="image-upload" type="file" accept="image/jpeg,image/png,image/webp"><small>A foto será reduzida e otimizada antes do envio.</small><img id="image-preview" class="admin-preview" alt="Prévia da imagem selecionada" hidden></div>
+          <div><label for="record-alt">Descrição da imagem</label><input id="record-alt" maxlength="500"></div>
+          <div data-partner-field><label for="record-url">Site do parceiro</label><input id="record-url" type="url" placeholder="https://"></div>
+          <div data-text-field><label for="record-body">Conteúdo completo</label><textarea id="record-body" rows="9"></textarea><small>Separe os parágrafos com uma linha em branco.</small></div>
+          <div data-event-field><label for="record-location">Local do evento</label><input id="record-location" maxlength="500"></div>
+          <div data-event-field><label for="record-time">Observações sobre o horário (opcional)</label><input id="record-time" placeholder="Ex.: recepção a partir das 13h30" maxlength="500"><small>A data e o horário principais devem ser preenchidos nos campos abaixo.</small></div>
+          <div data-event-field><label for="record-event-date">Data do evento</label><input id="record-event-date" type="date"></div>
+          <div data-event-field><label for="record-event-time">Horário do evento</label><input id="record-event-time" type="time"></div>
+          <label class="admin-checkbox"><input id="record-published" type="checkbox"> Publicar no site</label>
+          <div class="admin-actions"><button type="submit" class="button button-primary">Salvar</button><button id="preview-record" type="button" class="button button-outline">Visualizar</button><button id="cancel" type="button" class="button button-outline">Cancelar</button></div>
+        </form>
+      </section>
+    </section>
+  </main>
+  <dialog id="preview-dialog" class="admin-dialog"><button id="close-preview" class="button button-outline">Fechar prévia</button><div id="preview-content"></div></dialog>
+</body></html>
