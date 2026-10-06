@@ -21,7 +21,8 @@ function renderDetail(template, item, collection) {
     .replace(/<script src="assets\/postagens.js" defer><\/script>/, '');
 }
 function renderListing(template, posts) {
-  const items = [...posts].sort((a,b) => b.data.localeCompare(a.data));
+  const visiblePosts = template.includes('data-news-only') ? posts.filter(p => p.tipo === 'noticia') : posts;
+  const items = [...visiblePosts].sort((a,b) => b.data.localeCompare(a.data));
   const cards = items.map(item => `<article class="post-card">${item.imagem ? `<img src="${escape(item.imagem)}" alt="${escape(item.imagemAlt || item.titulo)}" loading="lazy">` : ''}<div class="post-card-body"><span class="eyebrow">${item.tipo === 'evento' ? 'Evento' : 'Notícia'}</span><h2>${escape(item.titulo)}</h2><p>${escape(item.resumo)}</p><a class="text-link" href="postagem.html?id=${encodeURIComponent(item.id)}">Ler publicação →</a></div></article>`).join('');
   let html = template.replace(/<div id="post-grid" class="post-grid"><\/div>/, () => `<div id="post-grid" class="post-grid">${cards}</div>`)
     .replace(/(<p id="post-count"[^>]*>).*?(<\/p>)/, `$1${items.length} ${items.length === 1 ? 'publicação encontrada' : 'publicações encontradas'}$2`)

@@ -9,7 +9,7 @@
   }
   const node = (tag, text, className) => { const el = document.createElement(tag); if (text) el.textContent = text; if (className) el.className = className; return el; };
   function card(item, collection) {
-    const article = node('article', '', 'post-card');
+    const article = node('article', '', collection === 'parceiros' ? 'post-card partner-card' : 'post-card');
     if (item.imagem) { const img = node('img'); img.src = item.imagem; img.alt = item.imagemAlt || item.titulo || item.nome; img.loading = 'lazy'; article.append(img); }
     const body = node('div', '', 'post-card-body'); body.append(node('h3', item.titulo || item.nome), node('p', item.resumo));
     if (collection === 'publicacoes') { const link = node('a', 'Ler publicação →', 'text-link'); link.href = `postagem.html?id=${encodeURIComponent(item.id)}`; body.append(link); }
@@ -27,6 +27,8 @@
   const nextEvents = posts.filter(p => p.tipo === 'evento' && p.dataEvento && p.dataEvento >= today).sort((a,b) => (a.dataEvento + (a.horaEvento || '')).localeCompare(b.dataEvento + (b.horaEvento || '')));
   if (location.pathname.endsWith('noticias.html')) {
     replace(document.querySelector('#noticias-lista .publication-card'), posts.filter(p => p.tipo === 'noticia'), 'publicacoes');
+    const featured = document.querySelector('#noticias-lista .post-card');
+    if (featured?.querySelector('img')) featured.classList.add('featured-news');
     const target = document.querySelector('#eventos-lista .publication-card');
     const events = posts.filter(p => p.tipo === 'evento');
     if (target && events.length) {

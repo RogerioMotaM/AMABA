@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#6E43A3">
-  <meta name="description" content="Acompanhe novidades institucionais e a agenda de eventos da AMABA.">
-  <title>Notícias e eventos | AMABA</title>
+  <meta name="description" content="Blog da AMABA: notícias, campanhas, encontros e histórias da nossa rede de cuidado em Balsas.">
+  <title>Blog | AMABA</title>
   <link rel="stylesheet" href="assets/site.css">
   <link rel="stylesheet" href="assets/internas.css">
 </head>
@@ -21,8 +21,8 @@
         <a href="index.html">Início</a>
         <a href="sobre.html">Sobre</a>
         <a href="projetos.html">Projetos e atividades</a>
-        <a href="noticias.html" aria-current="page">Notícias e eventos</a>
-        <a href="blog.html">Blog</a>
+        <a href="noticias.html">Notícias e eventos</a>
+        <a href="blog.html" aria-current="page">Blog</a>
         <a href="apoie.html">Apoie</a>
         <a href="parceiros.html">Parceiros</a>
         <a href="contato.html">Contato</a>
@@ -34,18 +34,28 @@
       <a href="index.html">Início</a>
       <a href="sobre.html">Sobre</a>
       <a href="projetos.html">Projetos e atividades</a>
-      <a href="noticias.html" aria-current="page">Notícias e eventos</a>
-      <a href="blog.html">Blog</a>
+      <a href="noticias.html">Notícias e eventos</a>
+      <a href="blog.html" aria-current="page">Blog</a>
         <a href="apoie.html">Apoie</a>
       <a href="parceiros.html">Parceiros</a>
       <a href="contato.html">Contato</a>
       <a href="login.html">Mães e cuidadoras</a><a href="admin.html">Área administrativa</a>
     </nav>
   </header>
-  <main id="conteudo" data-post-list>
-    <section class="inner-hero"><div class="container"><nav class="breadcrumb" aria-label="Você está aqui"><a href="index.html">Início</a><span>/</span><a href="noticias.html">Notícias e eventos</a><span>/</span><span aria-current="page">Todas as publicações</span></nav><span class="eyebrow">Acompanhe</span><h1>Todas as publicações.</h1><p class="hero-copy">Notícias, campanhas e encontros que fazem parte da nossa rede de cuidado.</p></div></section>
-    <section class="section"><div class="container">
-      <form class="post-filters" role="search"><div><label for="post-search">Buscar publicação</label><input id="post-search" type="search" placeholder="Digite um assunto" maxlength="150"></div><div><label for="post-category">Tipo de publicação</label><select id="post-category"><option value="">Todas</option><option value="noticia">Notícias</option><option value="evento">Eventos</option></select></div></form>
+  <main id="conteudo" data-post-list data-news-only>
+    <section class="inner-hero" aria-labelledby="blog-title"><div class="container inner-hero-grid">
+      <div class="inner-hero-copy">
+        <nav class="breadcrumb" aria-label="Você está aqui"><a href="index.html">Início</a><span aria-hidden="true">/</span><span aria-current="page">Blog</span></nav>
+        <span class="eyebrow">Blog da AMABA</span>
+        <h1 id="blog-title">Histórias que aproximam. Informação que acolhe.</h1>
+        <p class="hero-copy">Leia as notícias e acompanhe as campanhas da nossa associação. Um espaço para conhecer e fortalecer a rede de cuidado em Balsas.</p>
+        <div class="hero-actions"><a class="button button-primary" href="#publicacoes">Ler notícias ↓</a><a class="text-link" href="noticias.html#eventos-lista">Consultar agenda →</a></div>
+      </div>
+      <figure class="blog-hero-image"><img src="assets/foto-mae-crianca-brinquedos.webp" alt="Mulher e criança brincando com blocos coloridos" width="1920" height="1280"></figure>
+    </div></section>
+    <section id="publicacoes" class="section" aria-labelledby="publicacoes-title"><div class="container">
+      <div class="blog-intro"><div><span class="eyebrow">Nossa rede em movimento</span><h2 id="publicacoes-title">Acompanhe de perto.</h2></div><p>Encontre um assunto ou explore as notícias publicadas pela AMABA. Para encontros e atividades, consulte nossa agenda.</p></div>
+      <form class="post-filters" role="search"><div><label for="post-search">Buscar publicação</label><input id="post-search" type="search" placeholder="Digite um assunto" maxlength="150"></div><div><label for="post-category">Tipo de publicação</label><select id="post-category"><option value="noticia">Notícias e campanhas</option></select></div></form>
       <p id="post-count" role="status" aria-live="polite">Carregando publicações...</p><div id="post-grid" class="post-grid"></div>
       <div id="post-empty" hidden class="publication-card post-empty"><span class="eyebrow">Novas histórias em breve</span><h2>Nenhuma publicação por enquanto.</h2><p>As notícias e os eventos serão apresentados aqui quando publicados pela AMABA.</p><a class="button button-outline" href="contato.html">Fale com a AMABA</a></div>
       <noscript><p>Ative o JavaScript para consultar as publicações e utilizar os filtros.</p></noscript>

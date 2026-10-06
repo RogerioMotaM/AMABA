@@ -155,7 +155,7 @@ const server = http.createServer(async (req, res) => {
     if (url.pathname === '/sitemap.xml') {
       if (!process.env.AMABA_SITE_URL) { res.writeHead(503); return res.end('Configure AMABA_SITE_URL com o domínio público.'); }
       const base = process.env.AMABA_SITE_URL.replace(/\/$/, '');
-      const paths = ['index.html','sobre.html','projetos.html','noticias.html','postagens.html','apoie.html','parceiros.html','contato.html','privacidade.html','termos.html'];
+      const paths = ['index.html','sobre.html','projetos.html','noticias.html','postagens.html','blog.html','apoie.html','parceiros.html','contato.html','privacidade.html','termos.html'];
       const data = read();
       for (const [collection, page] of [['publicacoes', 'postagem.html'], ['projetos', 'projeto.html']]) for (const item of data[collection].filter(p => p.publicado)) paths.push(`${page}?id=${encodeURIComponent(item.id)}`);
       res.writeHead(200, { 'Content-Type': 'application/xml; charset=utf-8' });
@@ -166,7 +166,7 @@ const server = http.createServer(async (req, res) => {
     if (!/^\/(?:[a-z0-9-]+\.html|assets\/[\w .%\u00c0-\u024f-]+\.(?:css|js|jpg|jpeg|png|webp|svg))$/.test(pathname)) return notFound();
     const target = path.join(root, pathname);
     if (!fs.existsSync(target)) return notFound();
-    if (pathname === '/postagens.html') {
+    if (['/postagens.html', '/blog.html'].includes(pathname)) {
       res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-cache' });
       return res.end(req.method === 'HEAD' ? undefined : renderListing(fs.readFileSync(target, 'utf8'), read().publicacoes.filter(p => p.publicado)));
     }

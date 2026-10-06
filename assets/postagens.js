@@ -5,7 +5,8 @@ const publicacoes = [];
   try {
     const response = await fetch('/api/conteudo');
     if (!response.ok) throw new Error('Conteúdo indisponível');
-    publicacoes.push(...(await response.json()).publicacoes);
+    const posts = (await response.json()).publicacoes;
+    publicacoes.push(...(document.querySelector('[data-news-only]') ? posts.filter(post => post.tipo === 'noticia') : posts));
   } catch {
     const loading = document.querySelector('#post-loading');
     if (loading) loading.hidden = true;

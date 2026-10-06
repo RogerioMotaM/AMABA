@@ -73,6 +73,11 @@ test('authentication, drafts, CRUD, persistence and private file protection', as
     const item = { titulo: 'Teste', resumo: 'Resumo', data: '2026-10-03', tipo: 'noticia', publicado: false, paragrafos: ['Texto'], revisao: 1 };
     assert.equal((await fetch(base + '/api/admin/publicacoes', { method: 'POST', headers, body: JSON.stringify(item) })).status, 200);
     assert.equal((await (await fetch(base + '/api/conteudo')).json()).publicacoes.length, 0);
+    const emptyBlog = await fetch(base + '/blog.html');
+    assert.equal(emptyBlog.status, 200);
+    const emptyBlogHtml = await emptyBlog.text();
+    assert.match(emptyBlogHtml, /id="post-empty" class=/);
+    assert.doesNotMatch(emptyBlogHtml, /<h2>Teste<\/h2>/);
     const delayed = http.request(base + '/api/admin/publicacoes', { method: 'POST', headers }, response => response.resume());
     delayed.write('{"titulo":');
     const delayedDone = new Promise((resolve, reject) => { delayed.on('response', response => response.on('end', () => resolve(response.statusCode))); delayed.on('error', reject); });
@@ -89,6 +94,11 @@ test('authentication, drafts, CRUD, persistence and private file protection', as
     assert.equal((await (await fetch(base + '/api/conteudo')).json()).publicacoes[0].titulo, 'Teste');
     const rendered = await fetch(base + '/postagem.html?id=' + id); assert.equal(rendered.status, 200); const html = await rendered.text(); assert.match(html, /<h1>Teste<\/h1>/); assert.match(html, /og:title/); assert.doesNotMatch(html, /Carregando publicação/);
     const listing = await (await fetch(base + '/postagens.html')).text(); assert.match(listing, /<h2>Teste<\/h2>/);
+    const blog = await (await fetch(base + '/blog.html')).text();
+    assert.match(blog, /<title>Blog \| AMABA<\/title>/);
+    assert.match(blog, /<h2>Teste<\/h2>/);
+    assert.match(blog, new RegExp('postagem.html\\?id=' + id));
+    assert.match(await (await fetch(base + '/sitemap.xml')).text(), /https:\/\/amaba.example\/blog.html/);
     assert.match(await (await fetch(base + '/sitemap.xml')).text(), /https:\/\/amaba.example\/postagem.html/);
     assert.match(await (await fetch(base + '/robots.txt')).text(), /Disallow: \/admin.html/);
     assert.equal((await fetch(base + '/postagem.html?id=inexistente')).status, 404);
